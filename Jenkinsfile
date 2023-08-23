@@ -32,9 +32,9 @@ pipeline {
                     retry(3) {
                         sleep 10
                         response = httpRequest "http://localhost:${env.PORT}"
-                    }
-                    if ((response == null) || (response.status != 200)) {
-                        error "Failed to get a successful response"
+                        if ((response == null) || (response.status != 200)) {
+                            error "Failed to get a successful response"
+                        }
                     }
                 }
             }
