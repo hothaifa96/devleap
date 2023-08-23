@@ -49,7 +49,7 @@ pipeline {
             }
         } 
     }
-    always {
+    post {
         cleanup {
             sh "docker rmi -f ${env.ECR_REGISTRY}/hothaifazoubi"
             cleanWs()
