@@ -55,9 +55,6 @@ pipeline {
             cleanWs()
         }
     }
-    triggers {
-        // Trigger the pipeline on changes to the 'main' branch
-        branch('main')
-    }
+    
 }
     
