@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
         IMAGE_NAME = "${env.GIT_BRANCH.toLowerCase()}:v${env.BUILD_ID}"
-        PORT = 50000
+        PORT = 52020
         AWS_REGION = 'us-east-1' 
         ECR_REGISTRY = 'public.ecr.aws/e9i1b6d1'
     }
