@@ -26,7 +26,7 @@ pipeline {
         }
         stage('Testing'){
             steps {
-                sh "docker run -p ${env.PORT}:5000 --name testapi  ${env.IMAGE_NAME}"
+                sh "docker run -p ${env.PORT}:5000  ${env.IMAGE_NAME}"
                 script {
                     def response = null
                     retry(3) {
