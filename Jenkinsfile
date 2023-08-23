@@ -42,7 +42,7 @@ pipeline {
         stage('Publish image'){
             steps{
                  withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'jenkins-aws-cli']]) {
-                    sh "aws ecr get-login-password --region ${env.AWS_REGION} | docker login --username AWS --password-stdin ${env.ECR_REGISTRY}"
+                    sh "aws ecr-public get-login-password --region ${env.AWS_REGION} | docker login --username AWS --password-stdin ${env.ECR_REGISTRY}"
                     sh "docker tag ${env.IMAGE_NAME} ${env.ECR_REGISTRY}/hothaifazoubi"
                     sh "docker push ${env.ECR_REGISTRY}:latest"
                 }
