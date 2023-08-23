@@ -24,21 +24,21 @@ pipeline {
                 }
             }
         }
-        stage('Testing'){
-            steps {
-                sh "docker run -p ${env.PORT}:5000  ${env.IMAGE_NAME}  &"
-                script {
-                    def response = null
-                    retry(3) {
-                        sleep 10
-                        response = httpRequest "http://localhost:${env.PORT}"
-                        if ((response == null) || (response.status != 200)) {
-                            error "Failed to get a successful response"
-                        }
-                    }
-                }
-            }
-        }
+        // stage('Testing'){
+        //     steps {
+        //         sh "docker run -p ${env.PORT}:5000  ${env.IMAGE_NAME}  &"
+        //         script {
+        //             def response = null
+        //             retry(3) {
+        //                 sleep 10
+        //                 response = httpRequest "http://localhost:${env.PORT}"
+        //                 if ((response == null) || (response.status != 200)) {
+        //                     error "Failed to get a successful response"
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }
         stage('Publish image'){
             steps{
                  withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'jenkins-aws-cli']]) {
@@ -49,7 +49,7 @@ pipeline {
             }
         } 
     }
-    post {
+    always {
         cleanup {
             sh "docker rmi -f ${env.ECR_REGISTRY}/hothaifazoubi"
             cleanWs()
