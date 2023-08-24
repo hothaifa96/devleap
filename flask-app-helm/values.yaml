@@ -1,0 +1,19 @@
+
+replicaCount: 1
+
+image:
+  repository: public.ecr.aws/e9i1b6d1/hothaifazoubi
+  pullPolicy: IfNotPresent
+  tag: "latest"
+
+
+serviceAccount:
+  create: true
+  annotations: {}
+  name: ""
+
+
+
+service:
+  type: ClusterIP
+  port: 5000
